@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example Site - Privacy Policy Test Case 1</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Privacy Policy</h1>
+
+        <section>
+            <h2>Information We Collect</h2>
+            <p>We collect personal information when you register for our service, including your email address, name, and phone number. We also automatically collect device information such as your IP address, browser type, and operating system through cookies and similar technologies.</p>
+        </section>
+
+        <section>
+            <h2>How We Use Your Information</h2>
+            <p>We use your personal data for the following purposes:</p>
+            <ul>
+                <li>To provide and maintain our service</li>
+                <li>To send you marketing communications and promotional offers</li>
+                <li>To analyze usage patterns and improve our platform</li>
+                <li>To share with our advertising partners for targeted advertising</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Data Sharing</h2>
+            <p>We share your personal information with third-party advertising networks, analytics providers including Google Analytics, and social media platforms. We may also share data with our business partners for marketing purposes.</p>
+        </section>
+
+        <section>
+            <h2>Cookies</h2>
+            <p>We use the following types of cookies:</p>
+            <table>
+                <tr>
+                    <th>Cookie Name</th>
+                    <th>Purpose</th>
+                    <th>Duration</th>
+                </tr>
+                <tr>
+                    <td>_ga</td>
+                    <td>Google Analytics tracking</td>
+                    <td>2 years</td>
+                </tr>
+                <tr>
+                    <td>_fbp</td>
+                    <td>Facebook advertising</td>
+                    <td>90 days</td>
+                </tr>
+                <tr>
+                    <td>session_id</td>
+                    <td>User session management</td>
+                    <td>Session</td>
+                </tr>
+                <tr>
+                    <td>ad_tracking</td>
+                    <td>Advertisement personalization</td>
+                    <td>1 year</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Data Retention</h2>
+            <p>We retain your personal information for as long as necessary to provide our services. Marketing data is retained for 3 years, while analytics data may be kept for up to 5 years for business intelligence purposes.</p>
+        </section>
+
+        <section>
+            <h2>Your Rights</h2>
+            <p>Unfortunately, due to technical limitations, we cannot provide users with the ability to delete their personal data. Users may contact our support team to request data modifications, but deletion requests cannot be accommodated at this time.</p>
+        </section>
+
+        <section>
+            <h2>Contact Information</h2>
+            <p>If you have questions about this privacy policy, please contact us at support@example.com</p>
+        </section>
+    </main>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" style="position: fixed; bottom: 0; width: 100%; background: #333; color: white; padding: 20px; text-align: center;">
+        <p>We use cookies to enhance your experience and for advertising purposes. By continuing to use our site, you consent to our use of cookies.</p>
+        <button onclick="acceptCookies()">Accept All</button>
+        <button onclick="rejectCookies()">Reject Non-Essential</button>
+        <a href="/privacy-policy" style="color: #ccc;">Learn More</a>
+    </div>
+
+    <script>
+        // Set various cookies for testing
+        document.cookie = "_ga=GA1.2.123456789.123456789; expires=Fri, 31 Dec 2025 23:59:59 GMT; domain=.example.com";
+        document.cookie = "_fbp=fb.1.123456789.123456789; expires=Thu, 31 Mar 2024 23:59:59 GMT; domain=.example.com";
+        document.cookie = "session_id=abc123xyz; path=/";
+        document.cookie = "ad_tracking=enabled; expires=Sat, 31 Dec 2024 23:59:59 GMT; domain=.example.com";
+        document.cookie = "user_preferences=dark_mode; expires=Sun, 31 Dec 2024 23:59:59 GMT; path=/";
+
+        function acceptCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+
+        function rejectCookies() {
+            // Remove non-essential cookies
+            document.cookie = "_ga=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=.example.com";
+            document.cookie = "_fbp=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=.example.com";
+            document.cookie = "ad_tracking=; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=.example.com";
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+{
+  "domain": "example.com",
+  "url": "file:///path/to/test-privacy-policy-1.html",
+  "summary": "This site collects personal information including email, name, and phone number, plus device data through cookies. Data is shared with advertising partners and used for marketing communications.",
+  "data_use": [
+    {
+      "type": "email",
+      "purpose": "service provision and marketing",
+      "retention": "3 years for marketing data",
+      "shared_with": ["advertising networks", "analytics providers"]
+    },
+    {
+      "type": "name",
+      "purpose": "service provision and marketing",
+      "retention": "3 years for marketing data",
+      "shared_with": ["advertising networks", "business partners"]
+    },
+    {
+      "type": "phone",
+      "purpose": "service provision",
+      "retention": "as long as necessary",
+      "shared_with": []
+    },
+    {
+      "type": "device",
+      "purpose": "analytics and advertising",
+      "retention": "up to 5 years for analytics",
+      "shared_with": ["Google Analytics", "advertising networks"]
+    },
+    {
+      "type": "ip",
+      "purpose": "analytics and advertising",
+      "retention": "up to 5 years for analytics",
+      "shared_with": ["Google Analytics", "advertising networks"]
+    }
+  ],
+  "deletion": {
+    "can_user_delete": "no",
+    "how": "Contact support team for data modifications only - deletion requests cannot be accommodated",
+    "contacts_found": [
+      {
+        "name": "Support Team",
+        "email": "support@example.com",
+        "url": null
+      }
+    ]
+  },
+  "cookies": {
+    "cookie_count": 5,
+    "third_party_cookies": 2,
+    "tracking_cookies_detected": true,
+    "cookies_summary": [
+      {
+        "name": "_ga",
+        "domain": ".example.com",
+        "type": "analytics",
+        "expires": "2 years"
+      },
+      {
+        "name": "_fbp",
+        "domain": ".example.com",
+        "type": "advertising",
+        "expires": "90 days"
+      },
+      {
+        "name": "session_id",
+        "domain": "example.com",
+        "type": "essential",
+        "expires": "Session"
+      },
+      {
+        "name": "ad_tracking",
+        "domain": ".example.com",
+        "type": "advertising",
+        "expires": "1 year"
+      },
+      {
+        "name": "user_preferences",
+        "domain": "example.com",
+        "type": "preferences",
+        "expires": "1 year"
+      }
+    ]
+  },
+  "risk_score": 85,
+  "verdict": "UNSAFE",
+  "reasons": [
+    "Extensive data sharing with advertising partners",
+    "No ability to delete personal data",
+    "Long data retention periods (up to 5 years)",
+    "Multiple third-party tracking cookies",
+    "Data used for marketing without clear opt-out"
+  ],
+  "actions": [
+    "Avoid creating an account on this site",
+    "Use ad blockers to prevent tracking",
+    "Contact support@example.com to request data modifications",
+    "Consider using privacy-focused browser settings"
+  ],
+  "confidence": 0.9
+}

@@ -1,0 +1,90 @@
+{
+  "domain": "secureapp.com",
+  "url": "file:///path/to/test-privacy-policy-2.html",
+  "summary": "This site collects minimal essential data (email, username) and uses only necessary cookies. No data sharing with third parties for advertising, with strong user control and deletion rights.",
+  "data_use": [
+    {
+      "type": "email",
+      "purpose": "account creation and notifications",
+      "retention": "until account deletion",
+      "shared_with": []
+    },
+    {
+      "type": "username",
+      "purpose": "account identification",
+      "retention": "until account deletion",
+      "shared_with": []
+    },
+    {
+      "type": "usage_statistics",
+      "purpose": "service improvement (anonymized)",
+      "retention": "30 days maximum",
+      "shared_with": []
+    },
+    {
+      "type": "technical_logs",
+      "purpose": "security and performance monitoring",
+      "retention": "90 days maximum",
+      "shared_with": []
+    }
+  ],
+  "deletion": {
+    "can_user_delete": "yes",
+    "how": "Self-service deletion via account settings 'Delete Account' button, or contact Data Protection Officer. All data permanently removed within 30 days.",
+    "contacts_found": [
+      {
+        "name": "Data Protection Officer",
+        "email": "privacy@secureapp.com",
+        "url": null
+      },
+      {
+        "name": "General Support",
+        "email": "support@secureapp.com",
+        "url": null
+      }
+    ]
+  },
+  "cookies": {
+    "cookie_count": 3,
+    "third_party_cookies": 0,
+    "tracking_cookies_detected": false,
+    "cookies_summary": [
+      {
+        "name": "auth_token",
+        "domain": "secureapp.com",
+        "type": "essential",
+        "expires": "Session"
+      },
+      {
+        "name": "csrf_token",
+        "domain": "secureapp.com",
+        "type": "essential",
+        "expires": "Session"
+      },
+      {
+        "name": "user_settings",
+        "domain": "secureapp.com",
+        "type": "functional",
+        "expires": "30 days"
+      }
+    ]
+  },
+  "risk_score": 15,
+  "verdict": "SAFE",
+  "reasons": [
+    "Minimal data collection (only essential information)",
+    "No third-party data sharing for advertising",
+    "Strong user deletion rights with self-service options",
+    "Short data retention periods",
+    "Only essential and functional cookies used",
+    "No tracking or advertising cookies",
+    "Clear privacy controls and contact information"
+  ],
+  "actions": [
+    "This site demonstrates good privacy practices",
+    "You can safely create an account",
+    "Use the self-service privacy controls to manage your data",
+    "Contact privacy@secureapp.com for any data protection questions"
+  ],
+  "confidence": 0.95
+}

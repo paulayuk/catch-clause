@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Test Popup</title>
+</head>
+<body>
+  <h1>Test Popup</h1>
+  <button id="testBtn">Test Button</button>
+
+  <script>
+    console.log('TEST: Basic script running');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('TEST: DOM loaded');
+
+      const btn = document.getElementById('testBtn');
+      if (btn) {
+        console.log('TEST: Button found');
+        btn.addEventListener('click', () => {
+          console.log('TEST: Button clicked');
+          alert('Button works!');
+        });
+      } else {
+        console.log('TEST: Button NOT found');
+      }
+    });
+  </script>
+</body>
+</html>

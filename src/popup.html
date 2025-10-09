@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safemode - Privacy Analysis</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">🛡️</div>
+        <h1>Safemode</h1>
+      </div>
+      <div class="status-indicator" id="statusIndicator">
+        <div class="status-dot"></div>
+      </div>
+    </header>
+
+    <!-- Loading State -->
+    <div class="loading-state" id="loadingState" style="display: none;">
+      <div class="spinner"></div>
+      <p>Analyzing privacy policy...</p>
+    </div>
+
+    <!-- Error State -->
+    <div class="error-state" id="errorState" style="display: none;">
+      <div class="error-icon">⚠️</div>
+      <h3>Analysis Failed</h3>
+      <p id="errorMessage">Unable to analyze this website's privacy practices.</p>
+      <button class="btn btn-secondary" id="retryBtn">Try Again</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+
+      <!-- Site Info -->
+      <div class="site-info">
+        <div class="site-domain" id="siteDomain">example.com</div>
+        <div class="analysis-time" id="analysisTime">Click analyze to start</div>
+      </div>
+
+      <!-- Risk Badge -->
+      <div class="risk-badge" id="riskBadge">
+        <div class="risk-score" id="riskScore">--</div>
+        <div class="risk-verdict" id="riskVerdict">NOT ANALYZED</div>
+        <div class="risk-label">Privacy Risk</div>
+      </div>
+
+      <!-- Quick Summary -->
+      <div class="quick-summary" id="quickSummary" style="display: none;">
+        <div class="summary-item">
+          <span class="summary-label">Data Collection:</span>
+          <span class="summary-value" id="dataCollection">Unknown</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Third-party Cookies:</span>
+          <span class="summary-value" id="thirdPartyCookies">Unknown</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Can Delete Data:</span>
+          <span class="summary-value" id="canDelete">Unknown</span>
+        </div>
+      </div>
+
+      <!-- Key Points -->
+      <div class="key-points" id="keyPoints" style="display: none;">
+        <h3>Key Issues</h3>
+        <ul id="keyPointsList"></ul>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="actions-section">
+        <button class="btn btn-primary" id="analyzeBtn">
+          <span class="btn-icon">🔍</span>
+          Analyze Site
+        </button>
+
+        <button class="btn btn-secondary" id="fullReportBtn" style="display: none;">
+          <span class="btn-icon">📄</span>
+          Details
+        </button>
+      </div>
+
+      <!-- Settings Toggle -->
+      <div class="settings-section">
+        <div class="setting-item">
+          <label class="toggle-label">
+            <input type="checkbox" id="autoScanToggle">
+            <span class="toggle-slider"></span>
+            Auto-scan pages
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Full Report Modal -->
+    <div class="modal" id="reportModal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Privacy Report</h2>
+          <button class="close-btn" id="closeModalBtn">×</button>
+        </div>
+
+        <div class="modal-body" id="modalBody">
+          <!-- Report content will be populated here -->
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    console.log('Inline script test - JavaScript is working');
+    console.log('Testing Chrome APIs availability:');
+    console.log('chrome:', typeof chrome);
+    console.log('chrome.runtime:', typeof chrome?.runtime);
+    console.log('chrome.tabs:', typeof chrome?.tabs);
+    console.log('chrome.storage:', typeof chrome?.storage);
+
+    // Test for any immediate script errors
+    window.addEventListener('error', (e) => {
+      console.error('Script error detected:', e.error, e.filename, e.lineno);
+    });
+
+    console.log('Inline debug script completed');
+  </script>
+  <script src="popup.js"></script>
+</body>
+</html>

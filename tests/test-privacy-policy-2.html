@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureApp - Privacy Policy Test Case 2</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/features">Features</a>
+            <a href="/data-protection">Data Protection</a>
+            <a href="/support">Support</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Data Protection Policy</h1>
+
+        <section>
+            <h2>Our Commitment to Privacy</h2>
+            <p>At SecureApp, we are committed to protecting your privacy and ensuring the security of your personal information. We collect only the minimum data necessary to provide our services effectively.</p>
+        </section>
+
+        <section>
+            <h2>Data We Collect</h2>
+            <p>We collect only essential information required for service functionality:</p>
+            <ul>
+                <li>Email address for account creation and notifications</li>
+                <li>Username for account identification</li>
+                <li>Service usage statistics (anonymized)</li>
+                <li>Technical logs for security and performance monitoring</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>How We Use Your Data</h2>
+            <p>Your data is used exclusively for:</p>
+            <ul>
+                <li>Providing and improving our service functionality</li>
+                <li>Sending important service notifications</li>
+                <li>Security monitoring and fraud prevention</li>
+                <li>Technical support when requested</li>
+            </ul>
+            <p><strong>We do not use your data for marketing purposes or share it with third parties for advertising.</strong></p>
+        </section>
+
+        <section>
+            <h2>Data Sharing</h2>
+            <p>We do not sell, rent, or share your personal data with third parties except in the following limited circumstances:</p>
+            <ul>
+                <li>When required by law or legal process</li>
+                <li>To protect our rights, property, or safety</li>
+                <li>With your explicit consent</li>
+            </ul>
+            <p>We use minimal third-party services, limited to essential infrastructure providers with strong privacy protections.</p>
+        </section>
+
+        <section>
+            <h2>Cookies and Tracking</h2>
+            <p>We use only essential cookies required for service functionality:</p>
+            <table>
+                <tr>
+                    <th>Cookie Name</th>
+                    <th>Purpose</th>
+                    <th>Duration</th>
+                    <th>Type</th>
+                </tr>
+                <tr>
+                    <td>auth_token</td>
+                    <td>User authentication</td>
+                    <td>Session</td>
+                    <td>Strictly Necessary</td>
+                </tr>
+                <tr>
+                    <td>csrf_token</td>
+                    <td>Security protection</td>
+                    <td>Session</td>
+                    <td>Strictly Necessary</td>
+                </tr>
+                <tr>
+                    <td>user_settings</td>
+                    <td>Remember user preferences</td>
+                    <td>30 days</td>
+                    <td>Functional</td>
+                </tr>
+            </table>
+            <p><strong>We do not use tracking cookies, advertising cookies, or third-party analytics services.</strong></p>
+        </section>
+
+        <section>
+            <h2>Data Retention</h2>
+            <p>We retain data only as long as necessary:</p>
+            <ul>
+                <li>Account data: Until account deletion</li>
+                <li>Usage logs: 30 days maximum</li>
+                <li>Security logs: 90 days maximum</li>
+                <li>Deleted account data: Permanently removed within 30 days</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Your Data Rights</h2>
+            <p>You have full control over your data:</p>
+            <ul>
+                <li><strong>Access:</strong> View all data we hold about you</li>
+                <li><strong>Correction:</strong> Update inaccurate information</li>
+                <li><strong>Deletion:</strong> Permanently delete your account and all associated data</li>
+                <li><strong>Export:</strong> Download your data in a standard format</li>
+            </ul>
+
+            <h3>How to Exercise Your Rights</h3>
+            <p>To exercise any of these rights:</p>
+            <ol>
+                <li>Log into your account and visit the "Privacy Controls" section</li>
+                <li>Use the self-service data management tools</li>
+                <li>For account deletion, use the "Delete Account" button</li>
+                <li>For assistance, contact our Data Protection Officer at <a href="mailto:privacy@secureapp.com">privacy@secureapp.com</a></li>
+            </ol>
+            <p><strong>Response time:</strong> We respond to all data requests within 24 hours and complete data deletion within 30 days.</p>
+        </section>
+
+        <section>
+            <h2>Data Security</h2>
+            <p>We implement industry-leading security measures including encryption at rest and in transit, regular security audits, and strict access controls. All data is stored in secure data centers with appropriate physical and digital protections.</p>
+        </section>
+
+        <section>
+            <h2>Contact Information</h2>
+            <p>Data Protection Officer: <a href="mailto:privacy@secureapp.com">privacy@secureapp.com</a></p>
+            <p>General Support: <a href="mailto:support@secureapp.com">support@secureapp.com</a></p>
+            <p>Security Issues: <a href="mailto:security@secureapp.com">security@secureapp.com</a></p>
+        </section>
+
+        <section>
+            <h2>Policy Updates</h2>
+            <p>Last updated: January 15, 2024. We will notify users of any material changes to this policy via email and prominent notice on our website.</p>
+        </section>
+    </main>
+
+    <!-- No cookie banner needed as only essential cookies are used -->
+
+    <script>
+        // Set only essential cookies for testing
+        document.cookie = "auth_token=secure_token_123; path=/; secure; samesite=strict";
+        document.cookie = "csrf_token=csrf_abc123; path=/; secure; samesite=strict";
+        document.cookie = "user_settings=theme:light,lang:en; expires=Mon, 31 Jan 2024 23:59:59 GMT; path=/";
+    </script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+SYSTEM (high-level role):
+You are Claude Code — an expert full-stack engineer and Chrome extension developer who writes clear, copy-pasteable projects. Produce a complete Chrome Extension (Manifest V3) named "Safemode" that extracts website privacy policy text and cookie information, calls Chrome's built-in AI APIs (summarizer / prompt APIs), analyzes what the site will do with user data, whether the user can delete their data, and outputs a short judgment about whether it is safe to sign up. The extension must return machine-readable JSON results plus a human-readable UI summary.
+
+GOAL:
+Create a production-ready Chrome extension project that:
+1. When the user visits a page, finds a link / page text for the privacy policy (and any terms or cookie-page links).
+2. Downloads / scrapes the privacy policy text and the cookie banner / cookie details for that site (if present).
+3. Sends the scraped text to Chrome’s built-in AI summarizer & prompt APIs to:
+   - Summarize what the site does with personal data.
+   - Determine whether users can request deletion; where/how to do so.
+   - Produce a risk assessment (0-100) and a short verdict: SAFE / CAUTION / UNSAFE for signing up.
+4. Returns a predictable JSON schema and displays a user-friendly popup with the summary and recommended actions (e.g., "remove cookies", "contact DPO", "do not sign up").
+
+HIGH-LEVEL REQUIREMENTS:
+- Manifest V3 extension, service-worker (background) pattern.
+- A content script to scrape page text and cookie info.
+- Use chrome.storage to cache results for a domain (avoid re-checking on every page load).
+- Use chrome.permissions minimum required.
+- Call Chrome's built-in AI summarizer and prompt APIs (describe placeholders where chrome.ai or chrome.experimentalAI call should be inserted).
+- All AI prompts and templates must be included inside the extension so they can be updated easily.
+- Return both: (a) a human-readable summary and (b) a JSON object with structured fields (see schema).
+- Include unit-testable functions (scraping, cookie parsing, prompt preparation).
+- Provide a README with install/run/test instructions.
+- Provide example test pages (2 sample privacy policies) and examples of expected outputs.
+
+DETAILED FILES TO PRODUCE:
+- manifest.json
+- src/service-worker.js (or src/background.js depending on structure)
+- src/content-script.js
+- src/popup.html + popup.js + popup.css
+- src/utils/privacy-scraper.js (functions: findPrivacyPolicyLinks, fetchPolicyText)
+- src/utils/cookie-extractor.js
+- src/ai/prompt-templates.js (contains the exact prompts used with the Chrome AI prompt/summarizer APIs)
+- src/ai/ai-client.js (wrapper that calls chrome.ai.summarize and chrome.ai.prompt; include clearly marked placeholders for exact API names if experimental)
+- README.md with instructions and developer notes
+- tests/ (simple JS tests for scraping and JSON output formatting)
+- packaging script or instructions
+
+PRIVACY & SECURITY:
+- Do NOT send page content to any server you control — only call browser-built-in AI APIs (no third-party servers).
+- Document, in README, the privacy implications and how data may be handled.
+- Provide a toggle in the popup: “Run AI analysis automatically on page load” (on/off). Default: off.
+- Provide domain-level allowlist/blocklist.
+
+INPUTS (what content-script should gather):
+1. Page title and URL
+2. HTML body text (cleaned)
+3. Candidate privacy-policy links (search for `privacy`, `privacy-policy`, `privacy_policy`, `cookie`, `terms`, `data-protection`)
+4. If a privacy link is found and is same-origin or CORS allows, fetch the policy page content.
+5. Cookie data:
+   - `document.cookie` for client-accessible cookies.
+   - If chrome.cookies API is permitted, read cookies for the current domain and map domains, names, secure/httponly, expiration.
+6. Cookie banner meta: look for typical cookie banner markup (accept/deny) and any structured data about tracking categories.
+
+WHAT THE AI MUST OUTPUT (JSON schema):
+{
+  "domain": "example.com",
+  "url": "https://example.com/privacy",
+  "summary": "Short human summary (1-3 sentences).",
+  "data_use": [
+    { "type": "email", "purpose": "marketing", "retention": "90 days or as stated", "shared_with": ["analytics.example.com"] },
+    ...
+  ],
+  "deletion": {
+     "can_user_delete": "yes|no|unknown|partial",
+     "how": "instructions or link(s) to contact DPO or delete form",
+     "contacts_found": [{"name":"Data Protection Officer","email":"dpo@example.com","url":"..."}]
+  },
+  "cookies": {
+     "cookie_count": 12,
+     "third_party_cookies": 7,
+     "tracking_cookies_detected": true,
+     "cookies_summary": [
+       {"name":"_ga","domain":".google.com","type":"analytics","expires":"2 years"},
+       ...
+     ]
+  },
+  "risk_score": 0-100,
+  "verdict": "SAFE|CAUTION|UNSAFE",
+  "reasons": ["reason 1", "reason 2", ...],
+  "confidence": 0-1   // model confidence estimate
+}
+
+PROMPT TEMPLATES (use these exact templates with Chrome AI prompt & summarizer APIs):
+
+1) Short summarizer pass
+
+You are a concise privacy-policy summarizer. Given the following privacy policy text, return:
+    •   A 2-sentence plain English summary of what this site does with user personal data.
+    •   A JSON array of the main categories of data collected (e.g., email, name, payment, device, location, IP).
+    •   Any explicit retention times mentioned.
+INPUT:
+<>
+OUTPUT FORMAT:
+{
+“summary”: “…”,
+“categories”: [“email”, “ip”, …],
+“retention_clauses”: [”…”]
+}
+
+2) Cookie analysis prompt
+
+You are a cookie policy analyzer. Given cookies extracted from the site and any cookie table text from the policy, return:
+    •   Number of first-party and third-party cookies.
+    •   Whether cookies are used for tracking/advertising (yes/no/likely)
+    •   If cookie categories (strictly-necessary, preferences, statistics, marketing) are explicitly present and which cookies belong to which category.
+INPUT:
+<<COOKIE_DATA_JSON or cookie banner text>>
+OUTPUT FORMAT: JSON with fields { first_party: n, third_party: n, tracking: true|false|unknown, categories: {…} }
+
+3) Deletion & rights prompt
+
+You are a privacy-rights assistant. Read the policy and find whether it explains:
+    •   How a user can request deletion of data.
+    •   If a deletion process is described, provide step-by-step instructions and any links or emails.
+    •   If deletion is not described, return “no deletion info”.
+INPUT:
+<>
+OUTPUT FORMAT: JSON { can_delete: “yes|no|partial|unknown”, instructions: “…” , links: [”…”], contacts: [”…”] }
+
+4) Overall risk scoring + verdict (final combined prompt)
+
+You are a privacy risk scoring agent. Given the summarizer output, cookie analysis, and deletion analysis, produce:
+    •   risk_score (0-100) where 0 = no known issues, 100 = high-risk (massive data sharing, no deletion, third-party trackers)
+    •   verdict: SAFE | CAUTION | UNSAFE
+    •   concise reasons (max 5 bullets)
+    •   recommended user actions (max 4)
+INPUT:
+{
+“summarizer”: <<json from step 1>>,
+“cookies”: <<json from step 2>>,
+“deletion”: <<json from step 3>>,
+“domain”:“example.com”,
+“url”:“https://example.com”
+}
+OUTPUT FORMAT: JSON { “risk_score”: int, “verdict”:””, “reasons”:[…], “actions”:[…] }
+
+HOW TO INVOKE CHROME AI:
+- Use the built-in summarizer for the first summarization pass, then use the prompt API for the combined reasoning/policy extraction step.
+- Provide a wrapper `ai-client` module with two functions: `summarizeText(text, options)` and `runPrompt(promptName, payload)` that call chrome.ai.* APIs.
+- If the environment does not support `chrome.ai.*`, include a fallback to `fetch` a local mock that returns structured JSON for dev/testing.
+
+USER INTERFACE:
+- Popup: Domain, risk badge (color-coded), 2-line summary, button to "See full report", toggle for automatic scanning (default: off), button to re-check.
+- Full report page (Popup or separate tab) shows structured sections: What they collect, Cookies summary (table), Deletion instructions, Raw extracted policy (collapsible), Export JSON button.
+
+CACHING & RATE LIMITS:
+- Cache results per domain in chrome.storage.local with TTL = 24 hours.
+- Respect a maximum of 1 AI call per 10 seconds per domain. If user requests re-check, allow forced re-run but warn about usage.
+
+ERRORS & FALLBACKS:
+- If no privacy policy link is found, ask the AI to analyze the page content for privacy statements and return "policy_not_found" in JSON and an estimated risk based on visible privacy text.
+- If fetching the policy is blocked by CORS, try a content-script-based fetch (inject an iframe) or fall back to summarizing the visible policy content only.
+- If cookie permissions are not granted, warn the user and still attempt to analyze document.cookie.
+
+TEST CASES (include these in the repo):
+- Example 1: Short basic policy that explicitly states "we share data with advertisers", includes cookie table.
+- Example 2: Policy missing deletion info and heavy third-party tracking.
+- Expected output JSON for both (include sample outputs in /tests/expected/).
+
+DELIVERABLE FORMAT:
+- Return a zip or repository tree with all source files and a README.
+- README must include:
+  - How to load unpacked extension in Chrome.
+  - Permissions required and why.
+  - How to run tests.
+  - How to switch the AI backend to a mock (for local dev).
+- Include example outputs for two test pages.
+
+QUALITY REQUIREMENTS:
+- Code must be modular and commented.
+- All AI prompt templates must be easy to update (single file).
+- Output JSON must strictly follow the schema above.
+- Include a small test harness that simulates a page visit and verifies outputs match expected JSON.
+
+NON-FUNCTIONAL NOTES:
+- Keep dependency usage minimal (vanilla JS where possible).
+- Use ES modules.
+- Keep UI minimal and accessible.
+
+Finish by packaging everything into a single repo structure and provide instructions in README.
+
+If anything is ambiguous, make reasonable assumptions and document them in README (do not ask follow-up clarifying questions).
+
+Finally, i want a ui shown in the extensions tab, when i click the icon it should run for the current site i am on and show me its output for the site
+
+⸻
