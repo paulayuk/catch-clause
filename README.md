@@ -64,8 +64,6 @@ Safemode is a Chrome extension that automatically analyzes website privacy polic
    - Extension icon should appear in Chrome toolbar
    - Click icon to open Safemode popup
 
-### Option 2: Chrome Web Store (Future)
-Extension will be submitted to Chrome Web Store after testing phase.
 
 ## 📖 Usage Guide
 
@@ -340,8 +338,6 @@ For technical issues:
 5. Submit pull request
 
 ### Roadmap
-
-- [ ] Firefox extension support
 - [ ] Additional privacy frameworks (CCPA, GDPR indicators)
 - [ ] Historical tracking of site privacy changes
 - [ ] Integration with privacy-focused search engines
