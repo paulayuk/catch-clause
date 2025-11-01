@@ -1,3 +1,4 @@
 .claude/
 .specstory/
 requirements.txt
+.DS_Store
