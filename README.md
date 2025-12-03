@@ -1,8 +1,8 @@
-# catch clause Chrome Extension
+# Catch-Clause Chrome Extension
 
 A comprehensive privacy policy analyzer that evaluates website data collection practices and provides safety recommendations using Chrome's built-in AI APIs.
 
-## 🛡️ What is Catchclause?
+## 🛡️ What is Catch-clause?
 
 Catchclause is a Chrome extension that automatically analyzes website privacy policies and cookie practices to help you make informed decisions about your data privacy. It extracts privacy policy text, analyzes cookies, and uses Chrome's built-in AI to provide:
 
