@@ -1,4 +1,4 @@
-# Safemode Chrome Extension
+# catch clause Chrome Extension
 
 A comprehensive privacy policy analyzer that evaluates website data collection practices and provides safety recommendations using Chrome's built-in AI APIs.
 
