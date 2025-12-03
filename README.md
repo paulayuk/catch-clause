@@ -2,9 +2,9 @@
 
 A comprehensive privacy policy analyzer that evaluates website data collection practices and provides safety recommendations using Chrome's built-in AI APIs.
 
-## 🛡️ What is Safemode?
+## 🛡️ What is Catchclause?
 
-Safemode is a Chrome extension that automatically analyzes website privacy policies and cookie practices to help you make informed decisions about your data privacy. It extracts privacy policy text, analyzes cookies, and uses Chrome's built-in AI to provide:
+Catchclause is a Chrome extension that automatically analyzes website privacy policies and cookie practices to help you make informed decisions about your data privacy. It extracts privacy policy text, analyzes cookies, and uses Chrome's built-in AI to provide:
 
 - **Risk Assessment**: 0-100 privacy risk score
 - **Safety Verdict**: SAFE, CAUTION, or UNSAFE rating
@@ -73,7 +73,7 @@ Safemode is a Chrome extension that automatically analyzes website privacy polic
    - Navigate to any website you want to analyze
 
 2. **Open Safemode**
-   - Click the Safemode icon in the Chrome toolbar
+   - Click the Catchclause icon in the Chrome toolbar
    - Or use keyboard shortcut (if configured)
 
 3. **Analyze the Site**
@@ -88,7 +88,7 @@ Safemode is a Chrome extension that automatically analyzes website privacy polic
 ### Auto-Scan Mode
 
 1. **Enable Auto-Scan**
-   - Open Safemode popup
+   - Open Catchclause popup
    - Toggle "Auto-scan on page load" setting
 
 2. **Automatic Analysis**
@@ -187,7 +187,7 @@ See `tests/expected/` for detailed JSON outputs showing what the AI analysis sho
 ### File Structure
 
 ```
-safemode-extension/
+catch-clause/
 ├── manifest.json                 # Extension manifest
 ├── src/
 │   ├── service-worker.js         # Background script
